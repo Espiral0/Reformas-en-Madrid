@@ -1,0 +1,20 @@
+---
+import { site } from '../data/site';
+---
+
+<aside aria-label="Contacto directo WhatsApp" class="fixed bottom-24 right-6 md:bottom-8 md:right-8 z-50">
+  <a aria-label="Contactar por WhatsApp" class="w-[60px] h-[60px] rounded-full bg-whatsapp text-on-primary flex items-center justify-center shadow-[0_8px_24px_-2px_rgba(37,211,102,0.3)] hover:scale-105 transition-transform" href={site.whatsappHref} rel="noopener noreferrer" target="_blank">
+    <span class="material-symbols-outlined text-[32px]">chat</span>
+  </a>
+</aside>
+
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-lg shadow-[0_-2px_12px_rgba(0,0,0,0.06)] grid grid-cols-2 p-space-sm gap-space-sm md:hidden">
+  <a class="flex items-center justify-center gap-space-xs bg-surface-container-high text-on-surface py-space-sm rounded-lg font-label-md text-label-md" href={site.phoneHref}>
+    <span class="material-symbols-outlined text-[20px] text-primary">call</span>
+    <span>Llamar</span>
+  </a>
+  <a class="flex items-center justify-center gap-space-xs bg-whatsapp text-on-primary py-space-sm rounded-lg font-label-md text-label-md" href={site.whatsappHref} rel="noopener noreferrer" target="_blank">
+    <span class="material-symbols-outlined text-[20px]">chat</span>
+    <span>WhatsApp</span>
+  </a>
+</div>

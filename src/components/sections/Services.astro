@@ -1,0 +1,57 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import { services } from '../../data/services';
+
+interface Props {
+  showHeading?: boolean;
+}
+
+const { showHeading = true } = Astro.props;
+---
+
+<section id="servicios" class="w-full py-space-3xl bg-surface">
+  <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col gap-space-2xl">
+    {showHeading && (
+      <SectionHeading eyebrow="Servicios Transparentes" title="¿Qué quieres reformar?">
+        Precios de referencia reales para viviendas en Madrid. Sin letra pequeña, con materiales premium y dirección técnica continua.
+      </SectionHeading>
+    )}
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+      {services.map((s) => (
+        <div class="group bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
+          <a href={`/servicios/${s.slug}`} class="relative h-64 w-full overflow-hidden block">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={s.image} alt={s.alt} loading="lazy" />
+            <div class:list={['absolute top-4 left-4 px-3 py-1 rounded-full font-label-sm text-label-sm font-bold shadow-sm', s.badgeClass]}>{s.badge}</div>
+          </a>
+          <div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+            <div class="flex flex-col gap-space-xs">
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+                <a href={`/servicios/${s.slug}`} class="hover:text-primary transition-colors">{s.title}</a>
+              </h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">{s.text}</p>
+            </div>
+            <div class="pt-space-sm flex flex-col gap-space-md">
+              <div class="bg-surface-warm p-space-md rounded-xl">
+                <span class="font-caption text-caption uppercase text-on-surface-variant block">Presupuesto orientativo</span>
+                <div class="flex flex-wrap items-baseline gap-1">
+                  <span class="font-headline-md text-headline-md font-bold text-primary">{s.price}</span>
+                  <span class="font-caption text-caption text-on-surface-variant">{s.note}</span>
+                </div>
+              </div>
+              <a class="w-full bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface font-label-md text-label-md py-3 rounded-lg text-center transition-colors font-semibold" href={`/servicios/${s.slug}`}>Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-space-md p-space-lg bg-surface-warm rounded-2xl">
+      <a class="font-label-lg text-label-lg text-on-surface font-semibold hover:text-primary transition-colors flex items-center gap-space-xs" href="#presupuesto-form">
+        <span>¿Otro tipo de reforma? Cuéntanos tu idea</span>
+        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+      </a>
+      <a class="bg-primary text-on-primary font-label-lg text-label-lg px-space-lg py-3 rounded-lg shadow-sm hover:bg-primary-container transition-all" href="#presupuesto-form">Pide presupuesto gratis</a>
+    </div>
+  </div>
+</section>

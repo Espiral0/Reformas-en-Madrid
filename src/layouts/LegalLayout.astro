@@ -1,0 +1,23 @@
+---
+import Layout from './Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { legal } from '../data/site';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<Layout title={`${title} | Reformas en Madrid`}>
+  <PageHeader eyebrow="Información legal" title={title} breadcrumbs={[{ label: title }]} />
+  <section class="w-full py-space-3xl bg-surface">
+    <div class="max-w-3xl mx-auto px-margin-mobile md:px-margin">
+      <p class="font-caption text-caption text-on-surface-variant mb-space-lg">Última actualización: {legal.updated}</p>
+      <div class="prose">
+        <slot />
+      </div>
+    </div>
+  </section>
+</Layout>

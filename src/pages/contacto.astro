@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ServiceArea from '../components/sections/ServiceArea.astro';
+import { site } from '../data/site';
+
+const channels = [
+  { icon: 'call', label: 'Teléfono', value: site.phone, href: site.phoneHref },
+  { icon: 'chat', label: 'WhatsApp', value: 'Escríbenos ahora', href: site.whatsappHref, external: true },
+  { icon: 'mail', label: 'Email', value: site.email, href: `mailto:${site.email}` },
+  { icon: 'schedule', label: 'Horario', value: site.hours },
+];
+---
+
+<Layout
+  title="Contacto | Reformas en Madrid"
+  description="Pide tu presupuesto gratis: teléfono, WhatsApp, email y dirección de nuestro estudio en Madrid."
+>
+  <PageHeader eyebrow="Contacto" title="Hablemos de tu reforma" breadcrumbs={[{ label: 'Contacto' }]}>
+    Visita técnica y presupuesto gratis, sin compromiso. Te respondemos en menos de 24 horas.
+  </PageHeader>
+
+  <section class="w-full py-space-2xl bg-surface">
+    <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+      {channels.map((c) => {
+        const Tag = c.href ? 'a' : 'div';
+        return (
+          <Tag
+            href={c.href}
+            target={c.external ? '_blank' : undefined}
+            rel={c.external ? 'noopener noreferrer' : undefined}
+            class:list={['bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col gap-space-sm', c.href && 'hover:shadow-md transition-shadow']}
+          >
+            <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+              <span class="material-symbols-outlined text-[26px]">{c.icon}</span>
+            </div>
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">{c.label}</span>
+            <span class="font-label-lg text-label-lg text-on-surface font-bold break-words">{c.value}</span>
+          </Tag>
+        );
+      })}
+    </div>
+  </section>
+
+  <ServiceArea />
+</Layout>

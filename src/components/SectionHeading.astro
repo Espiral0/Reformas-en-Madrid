@@ -1,0 +1,29 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  align?: 'center' | 'split';
+  class?: string;
+}
+
+const { eyebrow, title, align = 'split', class: className = '' } = Astro.props;
+const hasText = Astro.slots.has('default');
+---
+
+{align === 'center' ? (
+  <div class:list={['text-center mx-auto flex flex-col gap-space-xs', className || 'max-w-3xl']}>
+    <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">{eyebrow}</span>
+    <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold tracking-tight">{title}</h2>
+    {hasText && <p class="font-body-lg text-body-lg text-on-surface-variant"><slot /></p>}
+  </div>
+) : (
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+    <div class="flex flex-col gap-space-xs">
+      <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">{eyebrow}</span>
+      <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold tracking-tight">{title}</h2>
+    </div>
+    <slot name="aside">
+      {hasText && <p class="font-body-md text-body-md text-on-surface-variant max-w-md"><slot /></p>}
+    </slot>
+  </div>
+)}

@@ -1,0 +1,34 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+
+const steps = [
+  { title: 'Pides presupuesto', text: 'Rellenas nuestro formulario online o nos escribes por WhatsApp en solo 1 minuto sin ningún compromiso.' },
+  { title: 'Visita técnica gratis', text: 'Nuestro arquitecto técnico acude a tu vivienda, toma medidas con láser y escucha todas tus ideas.' },
+  { title: 'Presupuesto y 3D', text: 'Te entregamos la valoración partida por partida y la recreación fotorrealista en tres dimensiones.' },
+  { title: 'Firma de contrato', text: 'Precio cerrado y calendario fijado por escrito, con cláusula de penalización por retrasos y garantía legal.' },
+  { title: 'Obra y llaves en mano', text: 'Ejecución por equipo propio, seguimiento semanal fotográfico, limpieza integral y entrega impecable.' },
+];
+---
+
+<section class="w-full py-space-3xl bg-surface">
+  <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col gap-space-2xl">
+    <SectionHeading eyebrow="Metodología Clara" title="Tu reforma en 5 pasos" align="center" class="max-w-2xl">
+      Un proceso estructurado, transparente y diseñado para garantizar tu máxima tranquilidad de principio a fin.
+    </SectionHeading>
+
+    <ol class="grid grid-cols-1 md:grid-cols-5 gap-space-md">
+      {steps.map((s, i) => (
+        <li class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col gap-space-sm">
+          <span class="text-primary font-display text-headline-lg font-bold opacity-30">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">{s.title}</h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-space-md pt-space-xs">
+      <a class="px-space-xl py-3.5 rounded-lg font-label-lg text-label-lg bg-primary text-on-primary hover:bg-primary-container transition-all shadow-md font-bold" href="#presupuesto-form">Empezar mi reforma</a>
+      <a class="px-space-xl py-3.5 rounded-lg font-label-lg text-label-lg bg-surface-container-high text-on-surface hover:bg-surface-dim transition-colors font-semibold" href="#presupuesto-form">Pide presupuesto gratis</a>
+    </div>
+  </div>
+</section>

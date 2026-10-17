@@ -1,0 +1,83 @@
+---
+// Estimador de reforma integral. Rangos €/m² basados en los 650–900 €/m² de referencia de la web.
+const calidades = [
+  { id: 'esencial', label: 'Esencial', desc: 'Materiales de gama media, funcionales y duraderos.', min: 650, max: 725 },
+  { id: 'confort', label: 'Confort', desc: 'Porcelánicos de gran formato, carpintería lacada, cocina a medida.', min: 725, max: 800 },
+  { id: 'premium', label: 'Premium', desc: 'Primeras marcas, cuarzo Silestone/Dekton, aerotermia, domótica.', min: 800, max: 900 },
+];
+---
+
+<div id="calculadora" class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-2xl shadow-xl grid grid-cols-1 lg:grid-cols-2 gap-space-xl scroll-mt-28" data-calculator data-calidades={JSON.stringify(calidades)}>
+  <div class="flex flex-col gap-space-lg">
+    <div class="flex flex-col gap-space-xs">
+      <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Calculadora</span>
+      <h2 class="font-headline-md text-headline-md text-on-surface font-bold">¿Cuánto costaría reformar tu piso?</h2>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">Elige la superficie y el nivel de acabados. Obtendrás un rango orientativo para una reforma integral.</p>
+    </div>
+
+    <div class="flex flex-col gap-space-sm">
+      <div class="flex items-center justify-between">
+        <label for="calc-m2" class="font-label-md text-label-md text-on-surface">Superficie de la vivienda</label>
+        <span class="font-headline-sm text-headline-sm text-on-surface font-bold"><output data-m2-out for="calc-m2">70</output> m²</span>
+      </div>
+      <input id="calc-m2" type="range" min="30" max="250" step="5" value="70" class="w-full accent-primary" data-m2 />
+      <div class="flex justify-between font-caption text-caption text-on-surface-variant"><span>30 m²</span><span>250 m²</span></div>
+    </div>
+
+    <fieldset class="flex flex-col gap-space-sm">
+      <legend class="font-label-md text-label-md text-on-surface mb-space-xs">Nivel de acabados</legend>
+      {calidades.map((c, i) => (
+        <label class="flex items-start gap-space-sm p-space-md rounded-xl bg-surface-warm cursor-pointer ring-primary has-[:checked]:ring-2 has-[:checked]:bg-surface-container-lowest transition-all">
+          <input type="radio" name="calidad" value={c.id} checked={i === 1} class="mt-1 accent-primary" data-calidad />
+          <span class="flex flex-col">
+            <span class="font-label-lg text-label-lg text-on-surface">{c.label} <span class="font-caption text-caption text-on-surface-variant">({c.min}–{c.max} €/m²)</span></span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">{c.desc}</span>
+          </span>
+        </label>
+      ))}
+    </fieldset>
+  </div>
+
+  <div class="flex flex-col justify-center gap-space-md bg-surface-warm p-space-lg md:p-space-xl rounded-2xl">
+    <span class="font-caption text-caption uppercase text-on-surface-variant">Estimación orientativa</span>
+    <p class="font-display text-display-mobile md:text-display text-primary font-bold" aria-live="polite">
+      <span data-result-min>50.750 €</span>
+      <span class="block font-headline-sm text-headline-sm text-on-surface-variant font-semibold">a <span data-result-max>56.000 €</span></span>
+    </p>
+    <ul class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+      <li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>Instalaciones, baño, cocina, suelos y pintura</li>
+      <li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>Gestión de licencias y render 3D</li>
+      <li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>Garantía de 3 años por escrito</li>
+    </ul>
+    <p class="font-caption text-caption text-on-surface-variant">
+      Cifra orientativa. El precio definitivo y cerrado se fija tras la visita técnica gratuita, según el estado de la vivienda y los materiales elegidos.
+    </p>
+    <a href="#presupuesto-form" class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3.5 rounded-lg shadow-md hover:bg-primary-container transition-all text-center font-bold">Quiero un presupuesto cerrado</a>
+  </div>
+</div>
+
+<script>
+  const fmt = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 });
+  // Redondea a centenas para no dar falsa precisión
+  const money = (n: number) => `${fmt.format(Math.round(n / 100) * 100)} €`;
+
+  document.querySelectorAll<HTMLElement>('[data-calculator]').forEach((calc) => {
+    const calidades: { id: string; min: number; max: number }[] = JSON.parse(calc.dataset.calidades!);
+    const m2 = calc.querySelector<HTMLInputElement>('[data-m2]')!;
+    const m2Out = calc.querySelector<HTMLOutputElement>('[data-m2-out]')!;
+    const minEl = calc.querySelector<HTMLElement>('[data-result-min]')!;
+    const maxEl = calc.querySelector<HTMLElement>('[data-result-max]')!;
+
+    function update() {
+      const area = Number(m2.value);
+      const selected = calc.querySelector<HTMLInputElement>('[data-calidad]:checked')!.value;
+      const c = calidades.find((q) => q.id === selected)!;
+      m2Out.value = String(area);
+      minEl.textContent = money(area * c.min);
+      maxEl.textContent = money(area * c.max);
+    }
+
+    calc.addEventListener('input', update);
+    update();
+  });
+</script>

@@ -1,0 +1,22 @@
+---
+const brands = [
+  { name: 'PORCELANOSA', class: 'tracking-tighter' },
+  { name: 'COSENTINO', class: 'font-extrabold tracking-widest' },
+  { name: 'KÖMMERLING', class: 'tracking-tight' },
+  { name: 'QUICK·STEP', class: 'tracking-normal' },
+];
+---
+
+<section class="w-full bg-surface-container-low py-space-lg">
+  <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col md:flex-row items-center justify-between gap-space-md">
+    <div class="flex items-center gap-space-xs text-on-surface-variant">
+      <span class="material-symbols-outlined text-[20px] text-primary">verified</span>
+      <span class="font-label-sm text-label-sm tracking-wider uppercase font-bold">Trabajamos con materiales de primeras marcas:</span>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-space-lg md:gap-space-xl opacity-80">
+      {brands.map((b) => (
+        <span class:list={['font-display text-headline-sm font-bold text-on-surface', b.class]}>{b.name}</span>
+      ))}
+    </div>
+  </div>
+</section>

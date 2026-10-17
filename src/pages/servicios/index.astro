@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Services from '../../components/sections/Services.astro';
+import WhyUs from '../../components/sections/WhyUs.astro';
+import Process from '../../components/sections/Process.astro';
+---
+
+<Layout
+  title="Servicios de reforma en Madrid | Reformas en Madrid"
+  description="Reformas integrales, de baño y de cocina en Madrid con precio cerrado, equipo propio y garantía de 3 años."
+>
+  <PageHeader eyebrow="Servicios" title="Reformas integrales, baños y cocinas en Madrid" breadcrumbs={[{ label: 'Servicios' }]}>
+    Un solo equipo para todo: proyecto, licencias, obra y entrega. Precios de referencia transparentes y presupuesto cerrado por contrato.
+  </PageHeader>
+  <Services showHeading={false} />
+  <WhyUs />
+  <Process />
+</Layout>

@@ -1,0 +1,102 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Process from '../../components/sections/Process.astro';
+import BeforeAfter from '../../components/sections/BeforeAfter.astro';
+import { services, type Service } from '../../data/services';
+
+export const getStaticPaths = (() =>
+  services.map((service) => ({ params: { slug: service.slug }, props: { service } }))) satisfies GetStaticPaths;
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const others = services.filter((s) => s.slug !== service.slug);
+---
+
+<Layout title={`${service.title} en Madrid | Reformas en Madrid`} description={service.text}>
+  <PageHeader
+    eyebrow={service.badge}
+    title={`${service.title} en Madrid`}
+    image={service.image}
+    breadcrumbs={[{ label: 'Servicios', href: '/servicios' }, { label: service.title }]}
+  >
+    {service.intro}
+  </PageHeader>
+
+  <section class="w-full py-space-3xl bg-surface">
+    <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+      <div class="lg:col-span-7 flex flex-col gap-space-lg">
+        <div class="flex flex-col gap-space-xs">
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Qué incluye</span>
+          <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold tracking-tight">Todo lo necesario, sin partidas ocultas</h2>
+        </div>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+          {service.includes.map((item) => (
+            <li class="flex items-start gap-space-sm bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+              <span class="material-symbols-outlined text-[20px] text-secondary shrink-0">check_circle</span>
+              <span class="font-body-sm text-body-sm text-on-surface">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <aside class="lg:col-span-5">
+        <div class="lg:sticky lg:top-28 bg-surface-container-lowest p-space-xl rounded-2xl shadow-xl flex flex-col gap-space-md">
+          <div class="bg-surface-warm p-space-md rounded-xl">
+            <span class="font-caption text-caption uppercase text-on-surface-variant block">Presupuesto orientativo</span>
+            <div class="flex flex-wrap items-baseline gap-1">
+              <span class="font-headline-lg text-headline-lg font-bold text-primary">{service.price}</span>
+              <span class="font-caption text-caption text-on-surface-variant">{service.note}</span>
+            </div>
+          </div>
+          <dl class="flex flex-col gap-space-sm font-body-sm text-body-sm">
+            <div class="flex items-center gap-space-sm">
+              <span class="material-symbols-outlined text-[20px] text-primary">schedule</span>
+              <dt class="sr-only">Plazo</dt>
+              <dd class="text-on-surface"><strong>Plazo:</strong> {service.duration}</dd>
+            </div>
+            <div class="flex items-center gap-space-sm">
+              <span class="material-symbols-outlined text-[20px] text-primary">verified_user</span>
+              <dt class="sr-only">Garantía</dt>
+              <dd class="text-on-surface"><strong>Garantía:</strong> 3 años por escrito</dd>
+            </div>
+            <div class="flex items-center gap-space-sm">
+              <span class="material-symbols-outlined text-[20px] text-primary">receipt_long</span>
+              <dt class="sr-only">Precio</dt>
+              <dd class="text-on-surface"><strong>Precio cerrado</strong> por contrato</dd>
+            </div>
+          </dl>
+          <a class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-3.5 rounded-lg shadow-md hover:bg-primary-container transition-all text-center font-bold" href="#presupuesto-form">Pedir presupuesto gratis</a>
+          {service.slug === 'reforma-integral' && (
+            <a class="text-center font-label-md text-label-md text-primary font-semibold hover:underline" href="/precios#calculadora">Calcular precio según metros</a>
+          )}
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {service.slug === 'reforma-integral' && <BeforeAfter />}
+  <Process />
+
+  <section class="w-full py-space-3xl bg-surface-warm">
+    <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col gap-space-lg">
+      <h2 class="font-headline-md text-headline-md text-on-surface font-bold">Otros servicios</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+        {others.map((s) => (
+          <a href={`/servicios/${s.slug}`} class="group flex items-center gap-space-md bg-surface-container-lowest p-space-md rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+            <img src={s.image} alt="" class="w-24 h-24 rounded-xl object-cover shrink-0" loading="lazy" />
+            <div class="flex flex-col gap-1">
+              <span class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">{s.title}</span>
+              <span class="font-label-md text-label-md text-primary">{s.price}</span>
+            </div>
+            <span class="material-symbols-outlined ml-auto text-on-surface-variant group-hover:text-primary transition-colors">arrow_forward</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

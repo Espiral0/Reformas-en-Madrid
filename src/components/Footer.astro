@@ -1,0 +1,97 @@
+---
+import { site } from '../data/site';
+
+const navLinks = [
+  { label: 'Quiénes somos', href: '/quienes-somos' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Proyectos', href: '/proyectos' },
+  { label: 'Precios y Tarifas', href: '/precios' },
+  { label: 'Blog y Guías', href: '/blog' },
+  { label: 'Contacto', href: '/contacto' },
+];
+
+const legalLinks = [
+  { label: 'Aviso Legal', href: '/aviso-legal' },
+  { label: 'Política de Privacidad', href: '/politica-de-privacidad' },
+  { label: 'Política de Cookies', href: '/politica-de-cookies' },
+];
+
+const socialLinks = [
+  { label: 'Ubicación', icon: 'pin_drop' },
+  { label: 'Proyectos y Fotografías', icon: 'photo_camera' },
+  { label: 'Compartir y Enlaces', icon: 'share' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="w-full bg-surface-warm py-space-3xl">
+  <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl mb-space-2xl">
+      <div class="flex flex-col gap-space-md">
+        <div class="flex items-center gap-space-md">
+          <img alt={`${site.name} Logo`} class="h-8 w-auto object-contain" src={site.logo} />
+          <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">{site.name}</span>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+          Estudio de arquitectura y reformas integrales residenciales de alto standing. Dos décadas ejecutando proyectos llave en mano con rigor técnico y diseño atemporal en la Comunidad de Madrid.
+        </p>
+        <div class="flex items-center gap-space-md pt-space-xs">
+          {socialLinks.map((s) => (
+            <a aria-label={s.label} class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" href="#">
+              <span class="material-symbols-outlined text-[18px]">{s.icon}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-space-md">
+        <h3 class="font-label-lg text-label-lg text-on-surface font-bold">Contacto y Ubicación</h3>
+        <ul class="flex flex-col gap-space-sm font-body-sm text-body-sm text-on-surface-variant">
+          <li class="flex items-start gap-space-xs">
+            <span class="material-symbols-outlined text-[18px] text-primary shrink-0">location_on</span>
+            <span>{site.address}</span>
+          </li>
+          <li class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-[18px] text-primary shrink-0">call</span>
+            <a class="hover:text-primary transition-colors" href={site.phoneHref}>{site.phone}</a>
+          </li>
+          <li class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-[18px] text-primary shrink-0">mail</span>
+            <a class="hover:text-primary transition-colors" href={`mailto:${site.email}`}>{site.email}</a>
+          </li>
+          <li class="flex items-start gap-space-xs">
+            <span class="material-symbols-outlined text-[18px] text-primary shrink-0">schedule</span>
+            <span>{site.hours}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-space-md">
+        <h3 class="font-label-lg text-label-lg text-on-surface font-bold">Navegación</h3>
+        <ul class="flex flex-col gap-space-sm font-body-sm text-body-sm text-on-surface-variant">
+          {navLinks.map((l) => (
+            <li><a class="hover:text-primary transition-colors" href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-space-md">
+        <h3 class="font-label-lg text-label-lg text-on-surface font-bold">Garantía y Legal</h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant">
+          Presupuestos cerrados sin sobrecostes. Garantía colegiada por contrato y dirección facultativa personalizada en cada obra.
+        </p>
+        <ul class="flex flex-col gap-space-xs font-caption text-caption text-on-surface-variant pt-space-xs">
+          {legalLinks.map((l) => (
+            <li><a class="hover:text-primary transition-colors" href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-caption text-caption">
+      <p>© {year} {site.name}. Todos los derechos reservados.</p>
+      <p>Arquitectura &amp; Reformas Integrales Residenciales en Madrid Centro, Salamanca, Chamberí y Pozuelo.</p>
+    </div>
+  </div>
+</footer>

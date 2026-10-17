@@ -1,0 +1,36 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import { faqs, type FaqItem } from '../../data/faqs';
+
+interface Props {
+  items?: FaqItem[];
+  title?: string;
+  description?: string;
+}
+
+const {
+  items = faqs,
+  title = 'Preguntas Frecuentes',
+  description = 'Resolvemos las dudas más habituales antes de empezar tu obra en Madrid.',
+} = Astro.props;
+---
+
+<section class="w-full py-space-3xl bg-surface-container-low">
+  <div class="max-w-4xl mx-auto px-margin-mobile md:px-margin flex flex-col gap-space-xl">
+    <SectionHeading eyebrow="Respuestas Directas" title={title} align="center" class="max-w-none">
+      {description}
+    </SectionHeading>
+
+    <div class="flex flex-col gap-space-sm">
+      {items.map((f, i) => (
+        <details class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm" open={i === 0}>
+          <summary class="list-none [&::-webkit-details-marker]:hidden w-full px-space-lg py-4 flex items-center justify-between gap-space-sm font-label-lg text-label-lg text-on-surface font-semibold hover:text-primary transition-colors">
+            <span>{f.q}</span>
+            <span class="material-symbols-outlined text-[24px] transition-transform duration-200 group-open:rotate-180">expand_more</span>
+          </summary>
+          <div class="px-space-lg pb-4 pt-1 text-on-surface-variant font-body-md text-body-md" set:html={f.a} />
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

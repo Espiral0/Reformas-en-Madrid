@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = new Intl.DateTimeFormat('es-ES', { dateStyle: 'long' });
+---
+
+<Layout title="Blog y guías de reformas | Reformas en Madrid" description="Guías prácticas sobre precios, plazos y trámites para reformar tu vivienda en Madrid.">
+  <PageHeader eyebrow="Blog y guías" title="Todo lo que necesitas saber antes de reformar" breadcrumbs={[{ label: 'Blog' }]}>
+    Precios, plazos y consejos prácticos de nuestro equipo técnico.
+  </PageHeader>
+
+  <section class="w-full py-space-3xl bg-surface">
+    <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+      {posts.map((post) => (
+        <a href={`/blog/${post.id}`} class="group bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
+          <div class="h-56 overflow-hidden">
+            <img src={post.data.image} alt={post.data.imageAlt} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-space-lg flex flex-col gap-space-xs flex-1">
+            <div class="flex items-center gap-space-sm font-caption text-caption text-on-surface-variant">
+              <span class="uppercase text-primary font-bold">{post.data.category}</span>
+              <span>·</span>
+              <time datetime={post.data.date.toISOString()}>{fmt.format(post.data.date)}</time>
+            </div>
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">{post.data.title}</h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">{post.data.description}</p>
+            <span class="mt-auto pt-space-sm inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold">
+              Leer artículo <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

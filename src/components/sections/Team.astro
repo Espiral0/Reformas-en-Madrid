@@ -1,0 +1,27 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import { team } from '../../data/team';
+---
+
+<section class="w-full py-space-3xl bg-surface">
+  <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col gap-space-2xl">
+    <SectionHeading eyebrow="Profesionales en Plantilla" title="Las personas detrás de tu reforma" align="center">
+      Albañiles, fontaneros, electricistas, carpinteros y pintores en plantilla fija, todos dados de alta en la Seguridad Social y con décadas de oficio en Madrid.
+    </SectionHeading>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+      {team.map((m) => (
+        <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex flex-col">
+          <div class="h-64 w-full overflow-hidden">
+            <img class="w-full h-full object-cover" src={m.image} alt={`Retrato de ${m.name}`} loading="lazy" />
+          </div>
+          <div class="p-space-md flex flex-col">
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">{m.name}</h3>
+            <span class="font-caption text-caption uppercase text-primary font-bold">{m.role}</span>
+            <p class="font-body-sm text-body-sm text-on-surface-variant pt-2">{m.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

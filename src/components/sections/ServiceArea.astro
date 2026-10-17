@@ -1,0 +1,58 @@
+---
+import { site } from '../../data/site';
+
+const areas = [
+  'Salamanca', 'Chamartín', 'Retiro', 'Centro', 'Chamberí', 'Moncloa-Aravaca', 'Tetuán',
+  'Hortaleza', 'Fuencarral', 'Pozuelo de Alarcón', 'Las Rozas', 'Majadahonda', 'Alcobendas',
+];
+
+const transport = [
+  { icon: 'train', text: 'Metro & Cercanías: Príncipe Pío (L6, L10, Ramal)' },
+  { icon: 'directions_bus', text: 'Autobuses EMT: Líneas 41, 75, 46' },
+  { icon: 'schedule', text: 'Horario continuado: L-V de 8:00 a 19:30' },
+];
+---
+
+<section class="w-full py-space-3xl bg-surface">
+  <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col gap-space-2xl">
+    <div class="flex flex-col gap-space-xs">
+      <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Ámbito Geográfico</span>
+      <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold tracking-tight">Trabajamos en todos los distritos de Madrid y alrededores</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        Contamos con equipos técnicos distribuidos estratégicamente para garantizar visitas ágiles y supervisión diaria en cada obra.
+      </p>
+    </div>
+
+    <ul class="flex flex-wrap gap-2">
+      {areas.map((a) => (
+        <li class="px-4 py-2 rounded-full bg-surface-warm text-on-surface font-label-md text-label-md font-medium">{a}</li>
+      ))}
+    </ul>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm">
+      <div class="lg:col-span-8 h-80 rounded-xl overflow-hidden">
+        <img class="w-full h-full object-cover" src="/images/mapa.png" alt="Mapa con la ubicación del estudio en Paseo del Comandante Fortea 4, Madrid" loading="lazy" />
+      </div>
+      <div class="lg:col-span-4 flex flex-col justify-center gap-space-md p-space-sm">
+        <div class="flex items-center gap-space-xs text-primary font-label-sm text-label-sm uppercase font-bold">
+          <span class="material-symbols-outlined text-[20px]">store</span>
+          <span>Estudio Central y Showroom</span>
+        </div>
+        <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">P.º del Comandante Fortea, 4</h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant">28008 Madrid (Junto a Ribera del Manzanares / Casa de Campo).</p>
+        <div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant pt-space-xs">
+          {transport.map((t) => (
+            <div class="flex items-center gap-space-xs">
+              <span class="material-symbols-outlined text-[18px] text-secondary">{t.icon}</span>
+              <span>{t.text}</span>
+            </div>
+          ))}
+        </div>
+        <a class="mt-2 inline-flex items-center gap-space-xs font-label-md text-label-md text-primary font-bold hover:underline" href={site.phoneHref}>
+          <span class="material-symbols-outlined text-[18px]">call</span>
+          <span>Llamar al estudio: {site.phone}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

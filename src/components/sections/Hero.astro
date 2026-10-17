@@ -1,0 +1,123 @@
+---
+import { site } from '../../data/site';
+
+const badges = [
+  { icon: 'verified', label: '+20 años exp.' },
+  { icon: 'apartment', label: '+500 pisos' },
+  { icon: 'security', label: 'Garantía 3 años' },
+];
+
+const metrics = [
+  { value: '0€', label: 'Visita técnica previa' },
+  { value: '100%', label: 'Compromiso en fecha' },
+  { value: '24h', label: 'Contacto inicial' },
+];
+
+const inputClass =
+  'w-full bg-surface-warm px-space-md py-3 rounded-lg text-body-md text-on-surface placeholder:text-outline/70 focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all';
+---
+
+<section class="relative w-full -mt-20 pt-28 pb-space-3xl md:pt-36 overflow-hidden bg-surface-warm">
+  <div class="absolute inset-0 w-full h-full bg-cover bg-center" style="background-image: url('/images/hero.jpg')" role="img" aria-label="Piso reformado en Madrid con cocina abierta, suelo de roble en espiga e isla de mármol"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-on-surface/90 via-on-surface/75 to-on-surface/50"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-on-surface/95 via-transparent to-transparent"></div>
+
+  <div class="relative max-w-7xl mx-auto px-margin-mobile md:px-margin grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+    <!-- Columna izquierda: mensaje y confianza -->
+    <div class="lg:col-span-7 flex flex-col gap-space-lg text-surface-lowest">
+      <div class="inline-flex items-center gap-space-xs self-start px-space-md py-1.5 rounded-full bg-surface-lowest/15 backdrop-blur-md">
+        <span class="w-2 h-2 rounded-full bg-whatsapp animate-ping"></span>
+        <span class="font-label-sm text-label-sm uppercase tracking-widest">Empresa Colegiada en Madrid</span>
+      </div>
+      <h1 class="font-display text-display-mobile md:text-display leading-tight tracking-tight font-bold">
+        Reforma integral de tu piso en Madrid <span class="text-primary-fixed-dim">desde 39.900€</span>
+      </h1>
+      <p class="font-body-lg text-body-lg text-surface-container-highest max-w-2xl font-light">
+        Precio cerrado y plazos por contrato. Equipo propio especializado, sin subcontratas intermedias. Garantía legal de 3 años por escrito.
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm pt-space-xs">
+        <div class="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-surface-lowest/10 backdrop-blur-md">
+          <span class="text-amber-400 font-bold text-sm">★ 4,9</span>
+          <span class="font-label-sm text-label-sm">en Google</span>
+        </div>
+        {badges.map((b) => (
+          <div class="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-surface-lowest/10 backdrop-blur-md">
+            <span class="material-symbols-outlined text-[18px] text-primary-fixed-dim">{b.icon}</span>
+            <span class="font-label-sm text-label-sm">{b.label}</span>
+          </div>
+        ))}
+      </div>
+      <div class="flex items-center gap-space-lg sm:gap-space-xl pt-space-sm">
+        {metrics.map((m, i) => (
+          <>
+            {i > 0 && <div class="w-px h-10 bg-surface-lowest/20"></div>}
+            <div>
+              <div class="font-headline-md text-headline-md font-bold">{m.value}</div>
+              <div class="font-caption text-caption text-surface-container-highest">{m.label}</div>
+            </div>
+          </>
+        ))}
+      </div>
+    </div>
+
+    <!-- Columna derecha: formulario -->
+    <div class="lg:col-span-5 w-full">
+      <div class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-2xl shadow-xl flex flex-col gap-space-md">
+        <div class="flex flex-col gap-space-xs">
+          <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Sin compromiso</span>
+          <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Recibe tu presupuesto gratis</h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Te preparamos una valoración detallada, partida a partida y ajustada a tu vivienda.</p>
+        </div>
+        <form class="flex flex-col gap-space-sm" data-lead-form data-success="¡Gracias! Nuestro arquitecto técnico se pondrá en contacto contigo en menos de 24 horas.">
+          <input type="hidden" name="formulario" value="hero" />
+          <input type="text" name="empresa" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-1" for="hero-nombre">Nombre y apellidos</label>
+            <input class={inputClass} id="hero-nombre" name="nombre" placeholder="Ej. Ana Fernández Gómez" required type="text" autocomplete="name" />
+          </div>
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-1" for="hero-tel">Teléfono de contacto</label>
+            <div data-field class="flex items-center bg-surface-warm rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-primary/20 focus-within:bg-surface-container-lowest">
+              <span class="px-space-md py-3 text-body-md text-on-surface-variant font-medium select-none bg-surface-container">+34</span>
+              <input class="w-full bg-transparent px-space-md py-3 text-body-md text-on-surface placeholder:text-outline/70 focus:outline-none" id="hero-tel" name="telefono" placeholder={site.phone} required type="tel" autocomplete="tel-national" />
+            </div>
+          </div>
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-1" for="hero-tipo">Tipo de reforma</label>
+            <select class={inputClass} id="hero-tipo" name="tipo">
+              <option value="integral">Reforma integral de piso</option>
+              <option value="bano">Reforma de baño completo</option>
+              <option value="cocina">Reforma de cocina a medida</option>
+              <option value="parcial">Reforma parcial / redistribución</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-1" for="hero-cp">Código Postal en Madrid</label>
+            <input class={inputClass} id="hero-cp" name="cp" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" placeholder="Ej. 28001 (Distrito Salamanca)" required type="text" autocomplete="postal-code" />
+          </div>
+          <div class="flex items-start gap-space-xs pt-1">
+            <input class="mt-1 h-4 w-4 rounded accent-primary" id="hero-privacidad" name="privacidad" required type="checkbox" />
+            <label class="font-caption text-caption text-on-surface-variant" for="hero-privacidad">
+              He leído y acepto la <a class="text-primary underline" href="/politica-de-privacidad" target="_blank">política de privacidad</a> para el envío de presupuestos.
+            </label>
+          </div>
+          <button class="w-full mt-2 bg-primary text-on-primary font-label-lg text-label-lg py-3.5 px-space-lg rounded-lg shadow-md hover:bg-primary-container transition-all flex items-center justify-center gap-space-xs font-bold" type="submit">
+            <span>Quiero mi presupuesto</span>
+            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+          </button>
+          <p data-form-status class="hidden" role="status" aria-live="polite"></p>
+        </form>
+        <div class="flex flex-col gap-space-xs pt-space-xs">
+          <div class="flex items-center gap-space-xs text-secondary font-label-sm text-label-sm">
+            <span class="material-symbols-outlined text-[18px]">check_circle</span>
+            <span>Te llamamos en menos de 24 h. Visita técnica 100% gratuita.</span>
+          </div>
+          <a class="flex items-center justify-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant hover:text-whatsapp transition-colors pt-1" href={site.whatsappHref} rel="noopener noreferrer" target="_blank">
+            <span class="material-symbols-outlined text-[18px] text-whatsapp">chat</span>
+            <span>o si lo prefieres, escríbenos directamente por WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

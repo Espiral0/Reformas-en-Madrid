@@ -1,0 +1,32 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { legal } from '../data/site';
+---
+
+<LegalLayout title="Política de cookies">
+  <h2>1. Qué son las cookies</h2>
+  <p>
+    Las cookies son pequeños archivos que un sitio web guarda en tu navegador para recordar información sobre tu visita.
+  </p>
+
+  <h2>2. Cookies que utiliza esta web</h2>
+  <p>
+    Actualmente este sitio web <strong>no instala cookies propias ni de terceros</strong> con fines analíticos, publicitarios o de seguimiento, por lo que no es necesario solicitar tu consentimiento.
+  </p>
+  <p>
+    Para mostrar las tipografías e iconos, la web carga recursos desde Google Fonts (Google LLC). Este servicio no instala cookies, pero tu navegador envía a Google tu dirección IP para descargar esos archivos. Puedes consultar la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">política de privacidad de Google</a>.
+  </p>
+  <p>
+    Los enlaces a WhatsApp y Google te llevan a servicios externos que aplican sus propias políticas de cookies.
+  </p>
+
+  <h2>3. Cambios en esta política</h2>
+  <p>
+    Si en el futuro incorporamos herramientas de analítica o publicidad que usen cookies, actualizaremos esta política y te pediremos el consentimiento antes de instalarlas.
+  </p>
+
+  <h2>4. Cómo gestionar las cookies</h2>
+  <p>
+    Puedes bloquear o eliminar las cookies desde la configuración de tu navegador. Si tienes cualquier duda, escríbenos a <a href={`mailto:${legal.email}`}>{legal.email}</a>.
+  </p>
+</LegalLayout>

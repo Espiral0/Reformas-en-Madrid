@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import BeforeAfter from '../components/sections/BeforeAfter.astro';
+---
+
+<Layout
+  title="Opiniones de clientes | Reformas en Madrid"
+  description="Lo que dicen los propietarios que han reformado su vivienda con nosotros: 4,9 de 5 en Google."
+>
+  <PageHeader eyebrow="Opiniones" title="Lo que dicen nuestros clientes" breadcrumbs={[{ label: 'Opiniones' }]}>
+    4,9 de 5 en Google con más de 180 opiniones de propietarios en Madrid.
+  </PageHeader>
+  <Testimonials showAllLink={false} />
+  <BeforeAfter />
+</Layout>

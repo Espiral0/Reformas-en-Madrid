@@ -1,0 +1,49 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { legal, site } from '../data/site';
+---
+
+<LegalLayout title="Aviso legal">
+  <h2>1. Datos identificativos</h2>
+  <p>
+    En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web:
+  </p>
+  <ul>
+    <li><strong>Titular:</strong> {legal.razonSocial}</li>
+    <li><strong>CIF/NIF:</strong> {legal.cif}</li>
+    <li><strong>Domicilio:</strong> {legal.domicilio}</li>
+    <li><strong>Registro:</strong> {legal.registro}</li>
+    <li><strong>Teléfono:</strong> {site.phone}</li>
+    <li><strong>Email:</strong> <a href={`mailto:${legal.email}`}>{legal.email}</a></li>
+  </ul>
+
+  <h2>2. Objeto</h2>
+  <p>
+    Este sitio web tiene como finalidad informar sobre los servicios de reforma de viviendas que ofrece el titular y permitir a los usuarios solicitar presupuestos. El acceso y uso del sitio atribuye la condición de usuario e implica la aceptación de este aviso legal.
+  </p>
+
+  <h2>3. Condiciones de uso</h2>
+  <p>
+    El usuario se compromete a hacer un uso adecuado de los contenidos y a no emplearlos para actividades ilícitas o contrarias a la buena fe. Los precios mostrados en la web son orientativos y no constituyen una oferta vinculante; el precio definitivo se fija en el presupuesto y contrato firmados por ambas partes.
+  </p>
+
+  <h2>4. Propiedad intelectual e industrial</h2>
+  <p>
+    Los contenidos de este sitio web (textos, fotografías, diseño, logotipos y código) son titularidad del titular o de terceros que han autorizado su uso. Queda prohibida su reproducción, distribución o transformación sin autorización expresa. Las marcas de terceros que aparecen en la web pertenecen a sus respectivos propietarios.
+  </p>
+
+  <h2>5. Responsabilidad</h2>
+  <p>
+    El titular no se hace responsable de los daños derivados de interrupciones del servicio, errores en los contenidos o del uso que los usuarios hagan de la información publicada. Los enlaces a sitios de terceros se ofrecen a título informativo y el titular no responde de sus contenidos.
+  </p>
+
+  <h2>6. Protección de datos</h2>
+  <p>
+    El tratamiento de los datos personales que facilites a través de esta web se rige por nuestra <a href="/politica-de-privacidad">política de privacidad</a>.
+  </p>
+
+  <h2>7. Legislación aplicable</h2>
+  <p>
+    Este aviso legal se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales que correspondan conforme a la normativa vigente.
+  </p>
+</LegalLayout>

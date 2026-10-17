@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { nav } from '../data/site';
+---
+
+<Layout title="Página no encontrada | Reformas en Madrid">
+  <section class="w-full py-space-3xl bg-surface-warm">
+    <div class="max-w-3xl mx-auto px-margin-mobile md:px-margin text-center flex flex-col items-center gap-space-md">
+      <span class="font-display text-display text-primary font-bold opacity-30">404</span>
+      <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold">Esta página está en obras</h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant">La página que buscas no existe o se ha movido. Prueba con alguna de estas secciones:</p>
+      <div class="flex flex-wrap justify-center gap-space-sm pt-space-sm">
+        <a href="/" class="px-space-lg py-3 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg font-bold hover:bg-primary-container transition-colors">Ir al inicio</a>
+        {nav.map((item) => (
+          <a href={item.href} class="px-space-lg py-3 rounded-lg bg-surface-container-lowest text-on-surface font-label-lg text-label-lg hover:text-primary transition-colors">{item.label}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

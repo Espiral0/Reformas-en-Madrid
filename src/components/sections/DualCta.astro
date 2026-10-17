@@ -1,0 +1,46 @@
+---
+const cards = [
+  {
+    icon: 'calculate',
+    iconClass: 'bg-primary/10 text-primary',
+    title: 'Calcula el precio de tu reforma en 2 minutos',
+    text: 'Usa nuestro estimador online para obtener una aproximación inmediata según los metros cuadrados de tu vivienda y la calidad de los acabados deseados.',
+    ctaIcon: 'tune',
+    cta: 'Usar calculadora online',
+    href: '/precios#calculadora',
+    ctaClass: 'bg-primary text-on-primary hover:bg-primary-container',
+  },
+  {
+    icon: 'layers',
+    iconClass: 'bg-secondary/15 text-secondary',
+    title: 'Visualiza tu piso reformado: render 3D gratis',
+    text: 'Nuestros interioristas modelan tu futura vivienda con distintas propuestas de tabiquería y paletas de color para que tomes la mejor decisión con seguridad.',
+    ctaIcon: 'vrpano',
+    cta: 'Pedir mi render 3D gratis',
+    href: '#presupuesto-form',
+    ctaClass: 'bg-secondary text-on-secondary hover:opacity-90',
+  },
+];
+---
+
+<section class="w-full py-space-2xl bg-surface-warm">
+  <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+    {cards.map((c) => (
+      <div class="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm flex flex-col justify-between gap-space-lg">
+        <div class="flex flex-col gap-space-sm">
+          <div class:list={['w-12 h-12 rounded-xl flex items-center justify-center', c.iconClass]}>
+            <span class="material-symbols-outlined text-[28px]">{c.icon}</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md text-on-surface font-bold">{c.title}</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant">{c.text}</p>
+        </div>
+        <div>
+          <a class:list={['inline-flex items-center justify-center gap-space-xs font-label-lg text-label-lg px-space-lg py-3.5 rounded-lg transition-all font-bold', c.ctaClass]} href={c.href}>
+            <span class="material-symbols-outlined text-[20px]">{c.ctaIcon}</span>
+            <span>{c.cta}</span>
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

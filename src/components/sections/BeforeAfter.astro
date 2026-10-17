@@ -1,0 +1,74 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import { projects } from '../../data/projects';
+
+interface Props {
+  showHeading?: boolean;
+  showAllLink?: boolean;
+}
+
+const { showHeading = true, showAllLink = true } = Astro.props;
+---
+
+<section id="proyectos" class="w-full py-space-3xl bg-surface">
+  <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col gap-space-2xl">
+    {showHeading && (
+      <SectionHeading eyebrow="Resultados Reales" title="Así quedan las casas que reformamos">
+        Casos de éxito reales en los principales barrios de Madrid. Pulsa «Antes» para comprobar la transformación integral.
+      </SectionHeading>
+    )}
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+      {projects.map((p) => (
+        <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex flex-col" data-before-after>
+          <div class="relative h-72 w-full overflow-hidden">
+            <img class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" src={p.after.src} alt={p.after.alt} loading="lazy" data-after />
+            <img class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0" src={p.before.src} alt={p.before.alt} loading="lazy" data-before />
+            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+              <span class="bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full font-label-sm text-label-sm font-semibold text-on-surface shadow-sm">{p.area}</span>
+              <div class="flex gap-1 pointer-events-auto bg-surface/90 backdrop-blur-md p-1 rounded-full" role="group" aria-label="Ver antes o después">
+                <button class="px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-primary text-on-primary transition-all font-bold" type="button" data-show="after" aria-pressed="true">Después</button>
+                <button class="px-2.5 py-1 rounded-full font-label-sm text-label-sm text-on-surface transition-all font-bold" type="button" data-show="before" aria-pressed="false">Antes</button>
+              </div>
+            </div>
+          </div>
+          <div class="p-space-lg flex flex-col gap-space-xs">
+            <span class="font-caption text-caption uppercase text-primary font-bold">{p.tag}</span>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">{p.title}</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">{p.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-space-md pt-space-md">
+      {showAllLink && (
+        <a class="px-space-xl py-3 rounded-lg font-label-lg text-label-lg text-secondary bg-secondary-fixed hover:bg-secondary hover:text-on-secondary transition-colors font-bold" href="/proyectos">Ver todos los proyectos</a>
+      )}
+      <a class="px-space-xl py-3 rounded-lg font-label-lg text-label-lg bg-primary text-on-primary hover:bg-primary-container transition-colors shadow-md font-bold" href="#presupuesto-form">Pide presupuesto gratis</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-before-after]').forEach((card) => {
+    const after = card.querySelector<HTMLElement>('[data-after]')!;
+    const before = card.querySelector<HTMLElement>('[data-before]')!;
+    const buttons = card.querySelectorAll<HTMLButtonElement>('[data-show]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const showBefore = btn.dataset.show === 'before';
+        before.classList.toggle('opacity-0', !showBefore);
+        after.classList.toggle('opacity-0', showBefore);
+        buttons.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('bg-primary', active);
+          b.classList.toggle('text-on-primary', active);
+          b.classList.toggle('text-on-surface', !active);
+          b.setAttribute('aria-pressed', String(active));
+        });
+      });
+    });
+  });
+</script>

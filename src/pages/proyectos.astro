@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import BeforeAfter from '../components/sections/BeforeAfter.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+---
+
+<Layout
+  title="Proyectos de reformas en Madrid: antes y después | Reformas en Madrid"
+  description="Reformas integrales reales en Chamberí, Salamanca y Retiro. Compara el antes y el después de cada vivienda."
+>
+  <PageHeader eyebrow="Proyectos" title="Así quedan las casas que reformamos" breadcrumbs={[{ label: 'Proyectos' }]}>
+    Casos reales en los principales barrios de Madrid. Pulsa «Antes» en cada proyecto para ver la vivienda tal y como estaba.
+  </PageHeader>
+  <BeforeAfter showHeading={false} showAllLink={false} />
+  <Testimonials />
+</Layout>

@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PriceCalculator from '../components/PriceCalculator.astro';
+import Faq from '../components/sections/Faq.astro';
+import { services } from '../data/services';
+import { pricingFaqs } from '../data/faqs';
+---
+
+<Layout
+  title="Precios de reformas en Madrid | Reformas en Madrid"
+  description="¿Cuánto cuesta reformar un piso en Madrid? Precios orientativos de reforma integral, baño y cocina, y calculadora online."
+>
+  <PageHeader eyebrow="Precios y tarifas" title="¿Cuánto cuesta reformar en Madrid?" breadcrumbs={[{ label: 'Precios' }]}>
+    Precios de referencia reales y una calculadora para estimar tu reforma integral. Después, te damos un presupuesto cerrado por contrato.
+  </PageHeader>
+
+  <section class="w-full py-space-3xl bg-surface">
+    <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col gap-space-2xl">
+      <PriceCalculator />
+
+      <div class="flex flex-col gap-space-lg">
+        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold tracking-tight">Precios orientativos por servicio</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+          {services.map((s) => (
+            <a href={`/servicios/${s.slug}`} class="group bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-space-sm">
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">{s.title}</h3>
+              <div class="flex flex-wrap items-baseline gap-1">
+                <span class="font-headline-md text-headline-md font-bold text-primary">{s.price}</span>
+                <span class="font-caption text-caption text-on-surface-variant">{s.note}</span>
+              </div>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">Plazo: {s.duration}</span>
+              <span class="mt-auto pt-space-sm inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold">
+                Ver qué incluye <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={pricingFaqs} title="Dudas sobre precios" description="Lo que más nos preguntan antes de pedir presupuesto." />
+</Layout>

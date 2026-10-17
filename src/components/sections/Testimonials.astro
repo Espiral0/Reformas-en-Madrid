@@ -1,0 +1,59 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import { testimonials } from '../../data/testimonials';
+
+interface Props {
+  showAllLink?: boolean;
+}
+
+const { showAllLink = true } = Astro.props;
+---
+
+<section id="opiniones" class="w-full py-space-3xl bg-surface-container-low">
+  <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col gap-space-2xl">
+    <SectionHeading eyebrow="Opiniones Verificadas" title="Lo que dicen nuestros clientes">
+      <div slot="aside" class="bg-surface-container-lowest px-space-lg py-space-sm rounded-2xl shadow-sm flex items-center gap-space-md self-start">
+        <div class="w-10 h-10 rounded-full bg-surface-warm flex items-center justify-center font-bold text-on-surface text-lg">G</div>
+        <div>
+          <div class="flex items-center gap-1">
+            <span class="font-headline-sm text-headline-sm font-bold text-on-surface">4,9</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">/ 5.0</span>
+            <span class="text-amber-500 ml-1">★★★★★</span>
+          </div>
+          <p class="font-caption text-caption text-on-surface-variant">+180 opiniones verificadas de propietarios</p>
+        </div>
+      </div>
+    </SectionHeading>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+      {testimonials.map((t) => (
+        <figure class="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm flex flex-col justify-between gap-space-lg">
+          <div class="flex flex-col gap-space-md">
+            <div class="flex items-center gap-1 text-amber-500" aria-label="5 de 5 estrellas">★★★★★</div>
+            <blockquote class="font-body-md text-body-md text-on-surface italic">"{t.quote}"</blockquote>
+          </div>
+          <figcaption class="flex items-center gap-space-md pt-space-xs">
+            <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center font-bold text-primary text-headline-sm">{t.initials}</div>
+            <div>
+              <p class="font-label-lg text-label-lg font-bold text-on-surface">{t.name}</p>
+              <p class="font-caption text-caption text-on-surface-variant">{t.detail}</p>
+            </div>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-space-lg pt-space-xs">
+      {showAllLink && (
+        <a class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-on-surface hover:text-primary font-semibold transition-colors" href="/opiniones">
+          <span>Ver más opiniones</span>
+          <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+        </a>
+      )}
+      <a class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-primary hover:text-primary-container font-semibold transition-colors" href="https://google.com" rel="noopener noreferrer" target="_blank">
+        <span>Ver todas las reseñas verificadas en Google (180+ reseñas)</span>
+        <span class="material-symbols-outlined text-[20px]">open_in_new</span>
+      </a>
+    </div>
+  </div>
+</section>

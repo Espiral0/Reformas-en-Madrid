@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = new Intl.DateTimeFormat('es-ES', { dateStyle: 'long' });
+---
+
+<Layout title={`${post.data.title} | Reformas en Madrid`} description={post.data.description}>
+  <PageHeader
+    eyebrow={`${post.data.category} · ${fmt.format(post.data.date)}`}
+    title={post.data.title}
+    image={post.data.image}
+    breadcrumbs={[{ label: 'Blog', href: '/blog' }, { label: post.data.title }]}
+  />
+
+  <article class="w-full py-space-3xl bg-surface">
+    <div class="max-w-3xl mx-auto px-margin-mobile md:px-margin">
+      <div class="prose">
+        <Content />
+      </div>
+      <a href="/blog" class="mt-space-2xl inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold hover:underline">
+        <span class="material-symbols-outlined text-[18px]">arrow_back</span> Volver al blog
+      </a>
+    </div>
+  </article>
+</Layout>

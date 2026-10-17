@@ -1,0 +1,40 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  image?: string;
+  breadcrumbs?: { label: string; href?: string }[];
+}
+
+const { eyebrow, title, image, breadcrumbs = [] } = Astro.props;
+const crumbs = [{ label: 'Inicio', href: '/' }, ...breadcrumbs];
+const dark = Boolean(image);
+---
+
+<section class:list={['relative w-full -mt-20 pt-32 pb-space-2xl md:pt-40 md:pb-space-3xl overflow-hidden', dark ? 'bg-on-surface' : 'bg-surface-warm']}>
+  {image && (
+    <>
+      <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${image}')`}></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-on-surface/90 via-on-surface/75 to-on-surface/50"></div>
+    </>
+  )}
+  <div class="relative max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col gap-space-md">
+    <nav aria-label="Ruta de navegación">
+      <ol class:list={['flex flex-wrap items-center gap-1 font-caption text-caption', dark ? 'text-surface-container-highest' : 'text-on-surface-variant']}>
+        {crumbs.map((c, i) => (
+          <li class="flex items-center gap-1">
+            {i > 0 && <span class="material-symbols-outlined text-[14px]">chevron_right</span>}
+            {c.href ? <a href={c.href} class="hover:underline">{c.label}</a> : <span aria-current="page">{c.label}</span>}
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <span class:list={['font-label-sm text-label-sm uppercase tracking-widest font-bold', dark ? 'text-primary-fixed-dim' : 'text-primary']}>{eyebrow}</span>
+    <h1 class:list={['font-display text-display-mobile md:text-display font-bold tracking-tight max-w-4xl', dark ? 'text-surface-lowest' : 'text-on-surface']}>{title}</h1>
+    {Astro.slots.has('default') && (
+      <p class:list={['font-body-lg text-body-lg max-w-2xl', dark ? 'text-surface-container-highest' : 'text-on-surface-variant']}>
+        <slot />
+      </p>
+    )}
+  </div>
+</section>
