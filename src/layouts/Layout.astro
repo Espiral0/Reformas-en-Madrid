@@ -4,6 +4,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FloatingContact from '../components/FloatingContact.astro';
 import ContactCta from '../components/sections/ContactCta.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import { analytics } from '../data/site';
 
 interface Props {
   title: string;
@@ -24,6 +26,75 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" href="/images/logo.png" />
     <title>{title}</title>
+
+    <!-- Google Consent Mode v2 (Inicialización antes de cualquier script de medición) -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      // Comprobar preferencias guardadas
+      var consentData = null;
+      try {
+        var raw = localStorage.getItem('rm_cookie_consent');
+        if (raw) consentData = JSON.parse(raw);
+      } catch (e) {}
+
+      var analyticsGranted = Boolean(consentData && consentData.analytics);
+      var marketingGranted = Boolean(consentData && consentData.marketing);
+
+      // Estado de consentimiento por defecto conforme a Consent Mode v2
+      gtag('consent', 'default', {
+        ad_storage: marketingGranted ? 'granted' : 'denied',
+        ad_user_data: marketingGranted ? 'granted' : 'denied',
+        ad_personalization: marketingGranted ? 'granted' : 'denied',
+        analytics_storage: analyticsGranted ? 'granted' : 'denied',
+        functionality_storage: 'granted',
+        personalization_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500,
+      });
+    </script>
+
+    {/* Si el comprador configura Google Tag Manager */}
+    {analytics.gtmId && (
+      <script is:inline define:vars={{ gtmId: analytics.gtmId }}>
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, 'dataLayer', gtmId);
+      </script>
+    )}
+
+    {/* Si el comprador configura Google Ads */}
+    {analytics.googleAdsId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.googleAdsId}`}></script>
+        <script is:inline define:vars={{ adsId: analytics.googleAdsId }}>
+          gtag('js', new Date());
+          gtag('config', adsId);
+        </script>
+      </>
+    )}
+
+    {/* Si el comprador configura solo GA4 */}
+    {analytics.ga4Id && !analytics.googleAdsId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.ga4Id}`}></script>
+        <script is:inline define:vars={{ gaId: analytics.ga4Id }}>
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -43,6 +114,7 @@ const {
     </main>
     <FloatingContact />
     <Footer />
+    <CookieBanner />
   </body>
 </html>
 

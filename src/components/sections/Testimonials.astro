@@ -1,6 +1,7 @@
 ---
 import SectionHeading from '../SectionHeading.astro';
 import { testimonials } from '../../data/testimonials';
+import { site } from '../../data/site';
 
 interface Props {
   showAllLink?: boolean;
@@ -20,7 +21,7 @@ const { showAllLink = true } = Astro.props;
             <span class="font-body-sm text-body-sm text-on-surface-variant">/ 5.0</span>
             <span class="text-amber-500 ml-1">★★★★★</span>
           </div>
-          <p class="font-caption text-caption text-on-surface-variant">+180 opiniones verificadas de propietarios</p>
+          <p class="font-caption text-caption text-on-surface-variant">34 opiniones verificadas (4,9/5 en Google)</p>
         </div>
       </div>
     </SectionHeading>
@@ -50,8 +51,8 @@ const { showAllLink = true } = Astro.props;
           <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
         </a>
       )}
-      <a class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-primary hover:text-primary-container font-semibold transition-colors" href="https://google.com" rel="noopener noreferrer" target="_blank">
-        <span>Ver todas las reseñas verificadas en Google (180+ reseñas)</span>
+      <a class="inline-flex items-center gap-space-xs font-label-lg text-label-lg text-primary hover:text-primary-container font-semibold transition-colors" href={site.googleMapsHref} rel="noopener noreferrer" target="_blank">
+        <span>Ver las 34 reseñas verificadas en Google (4,9/5)</span>
         <span class="material-symbols-outlined text-[20px]">open_in_new</span>
       </a>
     </div>

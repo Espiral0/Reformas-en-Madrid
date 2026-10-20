@@ -6,27 +6,60 @@ import { legal } from '../data/site';
 <LegalLayout title="Política de cookies">
   <h2>1. Qué son las cookies</h2>
   <p>
-    Las cookies son pequeños archivos que un sitio web guarda en tu navegador para recordar información sobre tu visita.
+    Una cookie es un pequeño fichero de texto que los sitios web almacenan en el navegador de tu ordenador o dispositivo móvil cuando los visitas. Se utilizan habitualmente para hacer que las páginas web funcionen con mayor eficacia, así como para proporcionar información sobre la navegación a los propietarios del sitio.
   </p>
 
-  <h2>2. Cookies que utiliza esta web</h2>
+  <h2>2. Tipos de cookies utilizadas en este sitio web</h2>
   <p>
-    Actualmente este sitio web <strong>no instala cookies propias ni de terceros</strong> con fines analíticos, publicitarios o de seguimiento, por lo que no es necesario solicitar tu consentimiento.
-  </p>
-  <p>
-    Para mostrar las tipografías e iconos, la web carga recursos desde Google Fonts (Google LLC). Este servicio no instala cookies, pero tu navegador envía a Google tu dirección IP para descargar esos archivos. Puedes consultar la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">política de privacidad de Google</a>.
-  </p>
-  <p>
-    Los enlaces a WhatsApp y Google te llevan a servicios externos que aplican sus propias políticas de cookies.
+    En <strong>{legal.razonSocial}</strong> categorizamos las cookies en función de su finalidad y únicamente instalamos cookies no esenciales si nos has otorgado previamente tu consentimiento expreso:
   </p>
 
-  <h2>3. Cambios en esta política</h2>
+  <h3>A. Cookies Técnicas y Estrictamente Necesarias</h3>
   <p>
-    Si en el futuro incorporamos herramientas de analítica o publicidad que usen cookies, actualizaremos esta política y te pediremos el consentimiento antes de instalarlas.
+    Son aquellas necesarias para el funcionamiento correcto de la web, la seguridad de la sesión, la entrega de formularios de contacto y presupuesto, y para recordar tus propias preferencias de privacidad sobre las cookies. Estas cookies están siempre activas y no requieren consentimiento previo con arreglo al art. 22.2 de la LSSI.
   </p>
 
-  <h2>4. Cómo gestionar las cookies</h2>
+  <h3>B. Cookies de Análisis y Medición (Opcionales)</h3>
   <p>
-    Puedes bloquear o eliminar las cookies desde la configuración de tu navegador. Si tienes cualquier duda, escríbenos a <a href={`mailto:${legal.email}`}>{legal.email}</a>.
+    Permiten cuantificar el número de usuarios y realizar la medición y análisis estadístico del uso que hacen del servicio ofertado (páginas más leídas, tiempo de permanencia). Se emplean a través de servicios como Google Analytics 4 bajo el marco de <strong>Google Consent Mode v2</strong>, garantizando que no se activan identificadores de seguimiento si no han sido previamente aceptadas.
+  </p>
+
+  <h3>C. Cookies de Publicidad Comportamental y Conversión (Opcionales)</h3>
+  <p>
+    Permiten la gestión eficaz de los espacios publicitarios en plataformas como Google Ads. Estas cookies miden si las visitas procedentes de anuncios realizan acciones como solicitar un presupuesto o llamar por teléfono, permitiendo optimizar el rendimiento de las campañas publicitarias. Al igual que las analíticas, solo se activan si otorgas tu consentimiento explícito.
+  </p>
+
+  <h2>3. Panel de gestión y revocación del consentimiento</h2>
+  <p>
+    Puedes modificar o revocar tus preferencias de cookies en cualquier momento pulsando el siguiente botón o a través del enlace situado en el pie de página de la web:
+  </p>
+  <div class="my-6">
+    <button
+      type="button"
+      data-cookie-settings-trigger
+      class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white font-label-md text-sm font-semibold hover:bg-primary-container transition-colors shadow-sm cursor-pointer"
+    >
+      <span class="material-symbols-outlined text-[18px]">tune</span>
+      Configurar preferencias de cookies
+    </button>
+  </div>
+
+  <h2>4. Servicios de terceros y tipografías</h2>
+  <p>
+    Para renderizar las tipografías corporativas e iconos técnicos de manera óptima, la web enlaza con Google Fonts (Google LLC). La descarga de estos archivos no instala cookies de seguimiento, aunque tu navegador comunica la dirección IP técnica para la transferencia de los ficheros de fuentes. Puedes consultar la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">política de privacidad de Google</a>.
+  </p>
+
+  <h2>5. Cómo deshabilitar las cookies en tu navegador</h2>
+  <p>
+    Además de nuestro panel de configuración, puedes permitir, bloquear o eliminar las cookies instaladas en tu equipo mediante la configuración de las opciones de tu navegador web:
+  </p>
+  <ul>
+    <li><strong>Google Chrome:</strong> Configuración &gt; Privacidad y seguridad &gt; Cookies y otros datos de sitios.</li>
+    <li><strong>Mozilla Firefox:</strong> Ajustes &gt; Privacidad &amp; Seguridad &gt; Cookies y datos del sitio.</li>
+    <li><strong>Apple Safari:</strong> Ajustes &gt; Safari &gt; Privacidad &amp; Seguridad.</li>
+    <li><strong>Microsoft Edge:</strong> Configuración &gt; Permisos del sitio &gt; Cookies y datos del sitio.</li>
+  </ul>
+  <p>
+    Para cualquier consulta sobre nuestra política de cookies y privacidad, puedes ponerte en contacto con nosotros en <a href={`mailto:${legal.email}`}>{legal.email}</a>.
   </p>
 </LegalLayout>

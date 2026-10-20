@@ -17,9 +17,9 @@ const legalLinks = [
 ];
 
 const socialLinks = [
-  { label: 'Ubicación', icon: 'pin_drop' },
-  { label: 'Proyectos y Fotografías', icon: 'photo_camera' },
-  { label: 'Compartir y Enlaces', icon: 'share' },
+  { label: 'Ubicación en Google Maps', icon: 'pin_drop', href: site.googleMapsHref, external: true },
+  { label: 'Proyectos y Fotografías', icon: 'photo_camera', href: '/proyectos', external: false },
+  { label: 'WhatsApp', icon: 'chat', href: site.whatsappHref, external: true },
 ];
 
 const year = new Date().getFullYear();
@@ -38,7 +38,13 @@ const year = new Date().getFullYear();
         </p>
         <div class="flex items-center gap-space-md pt-space-xs">
           {socialLinks.map((s) => (
-            <a aria-label={s.label} class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" href="#">
+            <a
+              aria-label={s.label}
+              class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors"
+              href={s.href}
+              target={s.external ? '_blank' : undefined}
+              rel={s.external ? 'noopener noreferrer' : undefined}
+            >
               <span class="material-symbols-outlined text-[18px]">{s.icon}</span>
             </a>
           ))}
@@ -50,7 +56,7 @@ const year = new Date().getFullYear();
         <ul class="flex flex-col gap-space-sm font-body-sm text-body-sm text-on-surface-variant">
           <li class="flex items-start gap-space-xs">
             <span class="material-symbols-outlined text-[18px] text-primary shrink-0">location_on</span>
-            <span>{site.address}</span>
+            <a class="hover:text-primary transition-colors" href={site.googleMapsHref} target="_blank" rel="noopener noreferrer">{site.address}</a>
           </li>
           <li class="flex items-center gap-space-xs">
             <span class="material-symbols-outlined text-[18px] text-primary shrink-0">call</span>
@@ -85,6 +91,15 @@ const year = new Date().getFullYear();
           {legalLinks.map((l) => (
             <li><a class="hover:text-primary transition-colors" href={l.href}>{l.label}</a></li>
           ))}
+          <li>
+            <button
+              type="button"
+              data-cookie-settings-trigger
+              class="hover:text-primary transition-colors text-left cursor-pointer text-inherit font-inherit"
+            >
+              Configuración de cookies
+            </button>
+          </li>
         </ul>
       </div>
     </div>
